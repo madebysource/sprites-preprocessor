@@ -4,5 +4,8 @@
   "description": "",
   "main": "index.js",
   "author": "Jan Sedivy",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "through2": "^0.4.1"
+  }
 }
