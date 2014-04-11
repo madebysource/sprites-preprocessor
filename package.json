@@ -1,0 +1,8 @@
+{
+  "name": "gulp-less-sprites",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "Jan Sedivy",
+  "license": "MIT"
+}
