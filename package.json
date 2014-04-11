@@ -6,6 +6,7 @@
   "author": "Jan Sedivy",
   "license": "MIT",
   "dependencies": {
+    "spritesmith": "^0.18.0",
     "through2": "^0.4.1"
   }
 }
