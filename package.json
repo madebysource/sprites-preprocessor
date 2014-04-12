@@ -7,6 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "spritesmith": "^0.18.0",
-    "through2": "^0.4.1"
+    "through2": "^0.4.1",
+    "vinyl": "^0.2.3"
   }
 }
