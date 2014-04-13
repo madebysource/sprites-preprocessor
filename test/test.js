@@ -36,4 +36,19 @@ describe('test', function() {
 
     stream.on('end', done);
   });
+
+  it('takes name and path as arguments', function(done) {
+    var stream = sprite({ name: 'images.png' });
+
+    stream.image.on('data', function(file) {
+      assert.equal(file.path, 'images.png');
+    });
+
+    stream.write(new File({
+      path: 'css-filename.css',
+      contents: new Buffer('', 'utf-8')
+    }));
+
+    stream.on('end', done);
+  });
 });

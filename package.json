@@ -6,6 +6,7 @@
   "author": "Jan Sedivy",
   "license": "MIT",
   "dependencies": {
+    "node.extend": "^1.0.10",
     "spritesmith": "^0.18.0",
     "vinyl": "^0.2.3"
   },
