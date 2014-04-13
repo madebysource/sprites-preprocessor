@@ -3,11 +3,12 @@ var sprite = require('../');
 var File = require('vinyl');
 
 describe('test', function() {
-  it('returns same filename with null content', function() {
+  it('returns same filename with null content', function(done) {
     var stream = sprite();
 
     stream.css.on('data', function(file) {
       assert.equal(file.path, 'css-filename.css');
+      done();
     });
 
     stream.write(new File({
@@ -15,7 +16,7 @@ describe('test', function() {
     }));
   });
 
-  it('returns same css file if there is no url', function() {
+  it('returns same css file if there is no url', function(done) {
     var stream = sprite();
 
     stream.css.on('data', function(file) {
@@ -24,6 +25,7 @@ describe('test', function() {
     });
 
     stream.image.on('data', function(file) {
+      assert.equal(file.path, 'sprite.png');
       assert.ok(file.isNull());
     });
 
@@ -31,5 +33,7 @@ describe('test', function() {
       path: 'css-filename.css',
       contents: new Buffer('body { color: red; }', 'utf-8')
     }));
+
+    stream.on('end', done);
   });
 });
