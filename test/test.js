@@ -42,13 +42,12 @@ describe('test', function() {
 
     stream.image.on('data', function(file) {
       assert.equal(file.path, 'images.png');
+      done();
     });
 
     stream.write(new File({
       path: 'css-filename.css',
       contents: new Buffer('', 'utf-8')
     }));
-
-    stream.on('end', done);
   });
 });
