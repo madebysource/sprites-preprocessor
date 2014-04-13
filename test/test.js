@@ -50,4 +50,19 @@ describe('test', function() {
       contents: new Buffer('', 'utf-8')
     }));
   });
+
+  it('takes path as an argument', function(done) {
+    var stream = sprite({ path: 'test/fixtures/' });
+
+    stream.image.on('data', function(file) {
+      assert.equal(file.isNull(), false);
+    });
+
+    stream.write(new File({
+      path: 'css-filename.css',
+      contents: new Buffer('body { background: url(/images/sprites/a.png); }', 'utf-8')
+    }));
+
+    stream.on('end', done);
+  });
 });
