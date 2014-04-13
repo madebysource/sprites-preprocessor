@@ -37,7 +37,7 @@ describe('test', function() {
     stream.on('end', done);
   });
 
-  it('takes name and path as arguments', function(done) {
+  it('takes name as argument', function(done) {
     var stream = sprite({ name: 'images.png' });
 
     stream.image.on('data', function(file) {
