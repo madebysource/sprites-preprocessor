@@ -56,13 +56,56 @@ describe('test', function() {
 
     stream.image.on('data', function(file) {
       assert.equal(file.isNull(), false);
+      done();
     });
 
     stream.write(new File({
       path: 'css-filename.css',
       contents: new Buffer('body { background: url(/images/sprites/a.png); }', 'utf-8')
     }));
+  });
 
-    stream.on('end', done);
+  it('rewrites sprite paths in css', function(done) {
+    var stream = sprite({ path: 'test/fixtures/' });
+
+    stream.css.on('data', function(file) {
+      assert.equal('body { background: url(sprite.png);\nbackground-position: 0px 0px;; }', file.contents.toString());
+      done();
+    });
+
+    stream.write(new File({
+      path: 'css-filename.css',
+      contents: new Buffer('body { background: url(/images/sprites/a.png); }', 'utf-8')
+    }));
+  });
+
+  it('leaves attributes behind the url', function(done) {
+    var stream = sprite({ path: 'test/fixtures/' });
+
+    stream.css.on('data', function(file) {
+      assert.equal('body { background: url(sprite.png) no-repeat;\nbackground-position: 0px 0px;; }', file.contents.toString());
+
+      done();
+    });
+
+    stream.write(new File({
+      path: 'css-filename.css',
+      contents: new Buffer('body { background: url(/images/sprites/a.png) no-repeat; }', 'utf-8')
+    }));
+  });
+
+  it('leaves normal image paths untouched', function(done) {
+    var stream = sprite({ path: 'test/fixtures/' });
+
+    stream.css.on('data', function(file) {
+      assert.equal('body { background2: url(abcd.png); background: url(sprite.png);\nbackground-position: 0px 0px;; }', file.contents.toString());
+
+      done();
+    });
+
+    stream.write(new File({
+      path: 'css-filename.css',
+      contents: new Buffer('body { background2: url(abcd.png); background: url(/images/sprites/a.png); }', 'utf-8')
+    }));
   });
 });
