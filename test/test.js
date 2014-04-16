@@ -21,7 +21,7 @@ describe('sprites', function() {
 
     stream.css.on('data', function(file) {
       assert.equal(file.path, 'css-filename.css');
-      assert.equal('body { color: red; }', file.contents.toString());
+      assert.equal(file.contents.toString(), 'body { color: red; }');
     });
 
     stream.image.on('data', function(file) {
@@ -69,7 +69,7 @@ describe('sprites', function() {
     var stream = sprite({ path: 'test/fixtures/' });
 
     stream.css.on('data', function(file) {
-      assert.equal('body { background: url(sprite.png);\nbackground-position: 0px 0px;; }', file.contents.toString());
+      assert.equal(file.contents.toString(), 'body { background: url(sprite.png);\nbackground-position: 0px 0px;; }');
       done();
     });
 
@@ -83,7 +83,7 @@ describe('sprites', function() {
     var stream = sprite({ path: 'test/fixtures/' });
 
     stream.css.on('data', function(file) {
-      assert.equal('body { background: url(sprite.png) no-repeat;\nbackground-position: 0px 0px;; }', file.contents.toString());
+      assert.equal(file.contents.toString(), 'body { background: url(sprite.png) no-repeat;\nbackground-position: 0px 0px;; }');
 
       done();
     });
@@ -98,7 +98,7 @@ describe('sprites', function() {
     var stream = sprite({ path: 'test/fixtures/' });
 
     stream.css.on('data', function(file) {
-      assert.equal('body { background2: url(abcd.png); background: url(sprite.png);\nbackground-position: 0px 0px;; }', file.contents.toString());
+      assert.equal(file.contents.toString(), 'body { background2: url(abcd.png); background: url(sprite.png);\nbackground-position: 0px 0px;; }');
 
       done();
     });
@@ -113,8 +113,8 @@ describe('sprites', function() {
     var stream = sprite({ path: 'test/fixtures/' });
 
     stream.css.on('data', function(file) {
-      assert.equal('body { background2: url(sprite.png);\nbackground-position: 0px 0px;; background: url(sprite.png);\nbackground-position: 0px -10px;; }',
-                   file.contents.toString());
+      assert.equal(file.contents.toString(),
+                  'body { background2: url(sprite.png);\nbackground-position: 0px 0px;; background: url(sprite.png);\nbackground-position: 0px -10px;; }');
 
       done();
     });
