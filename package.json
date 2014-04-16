@@ -8,7 +8,8 @@
   "dependencies": {
     "node.extend": "^1.0.10",
     "spritesmith": "^0.18.0",
-    "vinyl": "^0.2.3"
+    "vinyl": "^0.2.3",
+    "lodash": "^2.4.1"
   },
   "devDependencies": {
     "mocha": "^1.18.2"
