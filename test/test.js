@@ -139,4 +139,19 @@ describe('sprites', function() {
       contents: new Buffer('body { background: url(/images/sprites/non-existing-file.png); }', 'utf-8')
     }));
   });
+
+  it('accepts any types of quotes in url', function(done) {
+    var stream = sprite({ path: 'test/fixtures/' });
+
+    stream.css.on('data', function(file) {
+      assert.equal(file.contents.toString(), 'body { a: url(sprite.png);\nbackground-position: 0px 0px;; b: url(sprite.png);\nbackground-position: 0px -10px;; }');
+
+      done();
+    });
+
+    stream.write(new File({
+      path: 'css-filename.css',
+      contents: new Buffer('body { a: url(\'/images/sprites/a.png\'); b: url(\"/images/sprites/b.png\"); }', 'utf-8')
+    }));
+  });
 });
