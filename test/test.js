@@ -108,4 +108,20 @@ describe('test', function() {
       contents: new Buffer('body { background2: url(abcd.png); background: url(/images/sprites/a.png); }', 'utf-8')
     }));
   });
+
+  it('generates correct background position', function(done) {
+    var stream = sprite({ path: 'test/fixtures/' });
+
+    stream.css.on('data', function(file) {
+      assert.equal('body { background2: url(sprite.png);\nbackground-position: 0px 0px;; background: url(sprite.png);\nbackground-position: 0px -10px;; }',
+                   file.contents.toString());
+
+      done();
+    });
+
+    stream.write(new File({
+      path: 'css-filename.css',
+      contents: new Buffer('body { background2: url(/images/sprites/a.png); background: url(/images/sprites/b.png); }', 'utf-8')
+    }));
+  });
 });
