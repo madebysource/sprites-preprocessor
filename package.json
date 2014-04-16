@@ -1,5 +1,5 @@
 {
-  "name": "gulp-less-sprites",
+  "name": "sprites-preprocessor",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
