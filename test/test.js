@@ -124,4 +124,19 @@ describe('test', function() {
       contents: new Buffer('body { background2: url(/images/sprites/a.png); background: url(/images/sprites/b.png); }', 'utf-8')
     }));
   });
+
+  it('emit error event on errors', function(done) {
+    var stream = sprite({ path: 'test/fixtures/' });
+
+    stream.on('error', function(err) {
+      assert.equal(err.path, 'test/fixtures/non-existing-file.png');
+
+      done();
+    });
+
+    stream.write(new File({
+      path: 'css-filename.css',
+      contents: new Buffer('body { background: url(/images/sprites/non-existing-file.png); }', 'utf-8')
+    }));
+  });
 });
