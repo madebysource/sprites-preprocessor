@@ -69,7 +69,7 @@ describe('sprites', function() {
     var stream = sprite({ path: 'test/fixtures/' });
 
     stream.css.on('data', function(file) {
-      assert.equal(file.contents.toString(), 'body { background: url(sprite.png);\nbackground-position: 0px 0px; }');
+      assert.equal(file.contents.toString(), 'body { background: url(sprite.png); background-position: 0px 0px; }');
       done();
     });
 
@@ -83,7 +83,7 @@ describe('sprites', function() {
     var stream = sprite({ path: 'test/fixtures/' });
 
     stream.css.on('data', function(file) {
-      assert.equal(file.contents.toString(), 'body { background: url(sprite.png) no-repeat;\nbackground-position: 0px 0px; }');
+      assert.equal(file.contents.toString(), 'body { background: url(sprite.png) no-repeat; background-position: 0px 0px; }');
 
       done();
     });
@@ -98,7 +98,7 @@ describe('sprites', function() {
     var stream = sprite({ path: 'test/fixtures/' });
 
     stream.css.on('data', function(file) {
-      assert.equal(file.contents.toString(), 'body { background2: url(abcd.png); background: url(sprite.png);\nbackground-position: 0px 0px; }');
+      assert.equal(file.contents.toString(), 'body { background2: url(abcd.png); background: url(sprite.png); background-position: 0px 0px; }');
 
       done();
     });
@@ -114,7 +114,7 @@ describe('sprites', function() {
 
     stream.css.on('data', function(file) {
       assert.equal(file.contents.toString(),
-                  'body { background2: url(sprite.png);\nbackground-position: 0px 0px; background: url(sprite.png);\nbackground-position: 0px -10px; }');
+                  'body { background2: url(sprite.png); background-position: 0px 0px; background: url(sprite.png); background-position: 0px -10px; }');
 
       done();
     });
@@ -144,7 +144,7 @@ describe('sprites', function() {
     var stream = sprite({ path: 'test/fixtures/' });
 
     stream.css.on('data', function(file) {
-      assert.equal(file.contents.toString(), 'body { a: url(sprite.png);\nbackground-position: 0px 0px; b: url(sprite.png);\nbackground-position: 0px -10px; }');
+      assert.equal(file.contents.toString(), 'body { a: url(sprite.png); background-position: 0px 0px; b: url(sprite.png); background-position: 0px -10px; }');
 
       done();
     });
@@ -159,7 +159,7 @@ describe('sprites', function() {
     var stream = sprite({ path: 'test/fixtures/', prefix: '/custom-prefix-sprites/' });
 
     stream.css.on('data', function(file) {
-      assert.equal(file.contents.toString(), 'body { a: url(sprite.png);\nbackground-position: 0px 0px; }');
+      assert.equal(file.contents.toString(), 'body { a: url(sprite.png); background-position: 0px 0px; }');
 
       done();
     });
@@ -174,7 +174,7 @@ describe('sprites', function() {
     var stream = sprite({ path: 'test/fixtures/' });
 
     stream.css.on('data', function(file) {
-      assert.equal(file.contents.toString(), 'body { a: url(sprite.png);\nbackground-position: 0px 0px; b: url(sprite.png);\nbackground-position: 0px 0px; }');
+      assert.equal(file.contents.toString(), 'body { a: url(sprite.png); background-position: 0px 0px; b: url(sprite.png); background-position: 0px 0px; }');
 
       done();
     });
