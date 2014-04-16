@@ -2,7 +2,7 @@ var assert = require('assert');
 var sprite = require('../');
 var File = require('vinyl');
 
-describe('test', function() {
+describe('sprites', function() {
   it('returns same filename with null content', function(done) {
     var stream = sprite();
 
