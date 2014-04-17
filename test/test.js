@@ -184,4 +184,23 @@ describe('sprites', function() {
       contents: new Buffer('body { a: url(/images/sprites/a.png); b: url(/images/sprites/a.png); }', 'utf-8')
     }));
   });
+
+  it('receives data events on main sprite stream', function(done) {
+    var stream = sprite();
+
+    var files = [];
+    stream.on('data', function(file) {
+      files.push(file);
+    });
+
+    stream.on('end', function() {
+      assert.equal(files.length, 2);
+      done();
+    });
+
+    stream.write(new File({
+      path: 'css-filename.css',
+      contents: new Buffer('body { }', 'utf-8')
+    }));
+  });
 });
