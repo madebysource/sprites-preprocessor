@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "Jan Sedivy",
   "license": "MIT",
+  "scripts": {
+    "test": "mocha"
+  },
   "dependencies": {
     "node.extend": "^1.0.10",
     "spritesmith": "^0.18.0",

@@ -1,4 +1,4 @@
-# sprites-preprocessor
+# sprites-preprocessor [![Build Status](https://secure.travis-ci.org/madebysource/sprites-preprocessor.png?branch=master)](https://travis-ci.org/madebysource/sprites-preprocessor)
 
 > create sprite images from css files
 
