@@ -17,14 +17,14 @@ var createCSSPropertiesFor = function(coords) {
 
 var createCSSFile = function(name, content) {
   return new File({
-    path: name,
+    path: path.basename(name),
     contents: new Buffer(content, 'utf-8')
   });
 };
 
 var createImageFile = function(name, content) {
   return new File({
-    path: name,
+    path: path.basename(name),
     contents: content ? new Buffer(content, 'binary') : null
   });
 };
