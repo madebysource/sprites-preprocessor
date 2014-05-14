@@ -118,8 +118,6 @@ var sprite = function(options) {
       stream.push(css);
       stream.push(image);
 
-      stream.emit('end');
-
       callback();
     });
   };
