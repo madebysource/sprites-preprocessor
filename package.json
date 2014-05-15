@@ -3,7 +3,7 @@
   "version": "0.1.3",
   "description": "",
   "main": "index.js",
-  "author": "Jan Sedivy",
+  "author": "Jan Sedivy <jansedivy@abdoc.net>",
   "license": "MIT",
   "scripts": {
     "test": "mocha"
