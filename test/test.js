@@ -8,14 +8,12 @@ describe('sprites', function() {
 
     stream.css.on('data', function(file) {
       assert.equal(file.path, 'css-filename.css');
+      done();
     });
 
     stream.write(new File({
       path: 'css-filename.css'
     }));
-
-    stream.on('end', done);
-    stream.emit('end');
   });
 
   it('returns same css file if there is no url', function(done) {
@@ -37,7 +35,6 @@ describe('sprites', function() {
     }));
 
     stream.on('end', done);
-    stream.emit('end');
   });
 
   it('takes name as argument', function(done) {
@@ -53,7 +50,6 @@ describe('sprites', function() {
     }));
 
     stream.on('end', done);
-    stream.emit('end');
   });
 
   it('takes path as an argument', function(done) {
@@ -69,7 +65,6 @@ describe('sprites', function() {
     }));
 
     stream.on('end', done);
-    stream.emit('end');
   });
 
   it('rewrites sprite paths in css', function(done) {
@@ -85,23 +80,6 @@ describe('sprites', function() {
     }));
 
     stream.on('end', done);
-    stream.emit('end');
-  });
-
-  it('leaves attributes behind the url', function(done) {
-    var stream = sprite({ path: 'test/fixtures/' });
-
-    stream.css.on('data', function(file) {
-      assert.equal(file.contents.toString(), 'body { background: url(sprite.png) no-repeat; background-position: 0px 0px; }');
-    });
-
-    stream.write(new File({
-      path: 'css-filename.css',
-      contents: new Buffer('body { background: url(/images/sprites/a.png) no-repeat; }', 'utf-8')
-    }));
-
-    stream.on('end', done);
-    stream.emit('end');
   });
 
   it('leaves normal image paths untouched', function(done) {
@@ -117,7 +95,6 @@ describe('sprites', function() {
     }));
 
     stream.on('end', done);
-    stream.emit('end');
   });
 
   it('generates correct background position', function(done) {
@@ -134,7 +111,6 @@ describe('sprites', function() {
     }));
 
     stream.on('end', done);
-    stream.emit('end');
   });
 
   it('emit error event on errors', function(done) {
@@ -142,15 +118,13 @@ describe('sprites', function() {
 
     stream.on('error', function(err) {
       assert(err);
+      done();
     });
 
     stream.write(new File({
       path: 'css-filename.css',
       contents: new Buffer('body { background: url(/images/sprites/non-existing-file.png); }', 'utf-8')
     }));
-
-    stream.on('end', done);
-    stream.emit('end');
   });
 
   it('accepts any types of quotes in url', function(done) {
@@ -166,7 +140,6 @@ describe('sprites', function() {
     }));
 
     stream.on('end', done);
-    stream.emit('end');
   });
 
   it('takes base css path as argument', function(done) {
@@ -182,7 +155,6 @@ describe('sprites', function() {
     }));
 
     stream.on('end', done);
-    stream.emit('end');
   });
 
   it('generates one image in sprite for multiple urls of same image', function(done) {
@@ -198,6 +170,5 @@ describe('sprites', function() {
     }));
 
     stream.on('end', done);
-    stream.emit('end');
   });
 });
