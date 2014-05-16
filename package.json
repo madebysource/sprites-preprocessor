@@ -4,6 +4,10 @@
   "description": "",
   "main": "index.js",
   "author": "Jan Sedivy <jansedivy@abdoc.net>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/madebysource/sprites-preprocessor"
+  },
   "license": "MIT",
   "scripts": {
     "test": "mocha"
