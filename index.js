@@ -3,9 +3,9 @@ var File = require('vinyl');
 var extend = require('node.extend');
 var path = require('path');
 var uniq = require('lodash').uniq;
+var through = require('through2');
 
 var Readable = require('stream').Readable;
-var Duplex = require('stream').Duplex;
 
 var escapeRegExp = function(str) {
   return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
@@ -48,15 +48,6 @@ var defaultOptions = {
 var sprite = function(options) {
   options = extend(true, {}, defaultOptions, options);
 
-  var stream = new Duplex({ objectMode: true });
-  stream._read = function() {};
-
-  stream.css = new Readable({ objectMode: true });
-  stream.css._read = function() {};
-
-  stream.image = new Readable({ objectMode: true });
-  stream.image._read = function() {};
-
   var prefixRegex = new RegExp(escapeRegExp(options.prefix));
   var urlRegex = new RegExp("url\\((?:'|\")?(" + escapeRegExp(options.prefix) + ".*?)(?:'|\")?\\)(?:(.*?|\\n*?|\\r*?))(;|})", 'gi');
 
@@ -95,7 +86,7 @@ var sprite = function(options) {
     });
   };
 
-  stream._write = function(file, enc, callback) {
+  var stream = through.obj(function(file, enc, callback) {
     if (file.isNull()) {
       stream.css.push(file);
       return callback();
@@ -120,7 +111,13 @@ var sprite = function(options) {
 
       callback();
     });
-  };
+  });
+
+  stream.css = new Readable({ objectMode: true });
+  stream.css._read = function() {};
+
+  stream.image = new Readable({ objectMode: true });
+  stream.image._read = function() {};
 
   return stream;
 };
