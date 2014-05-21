@@ -1,11 +1,7 @@
 var spritesmith = require('spritesmith');
-var File = require('vinyl');
 var extend = require('node.extend');
 var path = require('path');
 var uniq = require('lodash').uniq;
-var through = require('through2');
-
-var Readable = require('stream').Readable;
 
 var escapeRegExp = function(str) {
   return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
@@ -13,20 +9,6 @@ var escapeRegExp = function(str) {
 
 var createCSSPropertiesFor = function(coords) {
   return 'background-position: ' + -coords.x + 'px ' + -coords.y + 'px';
-};
-
-var createCSSFile = function(name, content) {
-  return new File({
-    path: path.basename(name),
-    contents: new Buffer(content, 'utf-8')
-  });
-};
-
-var createImageFile = function(name, content) {
-  return new File({
-    path: path.basename(name),
-    contents: content ? new Buffer(content, 'binary') : null
-  });
 };
 
 var normalizeRest = function(rest) {
@@ -45,7 +27,7 @@ var defaultOptions = {
   prefix: '/images/sprites/'
 };
 
-var sprite = function(options) {
+var sprite = function(options, cssContent, callback) {
   options = extend(true, {}, defaultOptions, options);
 
   var prefixRegex = new RegExp(escapeRegExp(options.prefix));
@@ -86,40 +68,16 @@ var sprite = function(options) {
     });
   };
 
-  var stream = through.obj(function(file, enc, callback) {
-    if (file.isNull()) {
-      stream.css.push(file);
-      return callback();
-    }
+  var paths = uniq(findPaths(cssContent));
 
-    var content = file.contents.toString(enc);
-    var paths = uniq(findPaths(content));
+  spritesmith({ src: paths.map(createFullPath) }, function(err, result) {
+    if (err) { return callback(err); }
 
-    spritesmith({ src: paths.map(createFullPath) }, function(err, result) {
-      if (err) { return stream.emit('error', err); }
+    var finalCSS = replaceUrlsWithSprite(cssContent, result.coordinates);
+    var image = result.image;
 
-      content = replaceUrlsWithSprite(content, result.coordinates);
-
-      var css = createCSSFile(file.path, content);
-      var image = createImageFile(options.name, result.image);
-
-      stream.css.push(css);
-      stream.image.push(image);
-
-      stream.push(css);
-      stream.push(image);
-
-      callback();
-    });
+    callback(null, finalCSS, image);
   });
-
-  stream.css = new Readable({ objectMode: true });
-  stream.css._read = function() {};
-
-  stream.image = new Readable({ objectMode: true });
-  stream.image._read = function() {};
-
-  return stream;
 };
 
 module.exports = sprite;

@@ -15,9 +15,7 @@
   "dependencies": {
     "lodash": "^2.4.1",
     "node.extend": "^1.0.10",
-    "spritesmith": "^0.18.0",
-    "through2": "^0.4.1",
-    "vinyl": "^0.2.3"
+    "spritesmith": "^0.18.0"
   },
   "devDependencies": {
     "mocha": "^1.18.2"
