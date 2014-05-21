@@ -13,15 +13,13 @@ $ npm install --save-dev sprites-preprocessor
 ```js
 var sprites = require('sprites-preprocessor');
 
-gulp.task('sprites', function(done) {
-    gulp.src('main.css')
-      .pipe(sprites({
-        name: 'sprite.png',
-        path: 'images/sprites',
-        prefix: '/images/sprites/'
-      }))
-      .pipe(gulp.dest('dist'))
-      .on('end', done);
+var options = {
+  name: 'sprite.png',
+  path: 'images/sprites',
+  prefix: '/images/sprites/'
+};
+
+sprites(options, 'body { background: url(/images/sprite/file.png); }', function(err, css, image) {
 });
 ```
 
