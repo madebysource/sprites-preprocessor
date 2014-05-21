@@ -1,6 +1,6 @@
 {
   "name": "sprites-preprocessor",
-  "version": "0.1.5",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "author": "Jan Sedivy <jansedivy@abdoc.net>",
