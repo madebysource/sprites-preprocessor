@@ -8,7 +8,7 @@
 $ npm install --save-dev sprites-preprocessor
 ```
 
-## Gulp Usage
+## Usage
 
 ```js
 var sprites = require('sprites-preprocessor');
