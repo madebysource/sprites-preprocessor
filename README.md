@@ -24,6 +24,10 @@ sprites(options, 'body { background: url(/images/sprite/file.png); }', function(
 });
 ```
 
+### Gulp usage
+
+For gulp tasks there is gulp plugin [gulp-sprite-preprocessor](https://github.com/madebysource/gulp-sprites-preprocessor)
+
 ## API
 
 ### sprites(options)
