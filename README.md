@@ -20,6 +20,7 @@ var options = {
 };
 
 sprites(options, 'body { background: url(/images/sprite/file.png); }', function(err, css, image) {
+  // code
 });
 ```
 
