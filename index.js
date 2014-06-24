@@ -1,7 +1,10 @@
 var spritesmith = require('spritesmith');
-var extend = require('node.extend');
 var path = require('path');
-var uniq = require('lodash').uniq;
+
+var _ = require('lodash');
+
+var uniq = _.uniq;
+var extend = _.extend;
 
 var escapeRegExp = function(str) {
   return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
@@ -72,7 +75,7 @@ var getFullPaths = function(prefixRegex, urlRegex, basePath, cssContent) {
 };
 
 var sprite = function(options, cssContent, callback) {
-  options = extend(true, {}, defaultOptions, options);
+  options = extend({}, defaultOptions, options);
 
   var prefixRegex = new RegExp(escapeRegExp(options.prefix));
   var urlRegex = new RegExp("url\\((?:'|\")?(" + escapeRegExp(options.prefix) + ".*?)(?:'|\")?\\)(?:(.*?|\\n*?|\\r*?))(;|})", 'gi');

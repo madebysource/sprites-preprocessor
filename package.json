@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "lodash": "^2.4.1",
-    "node.extend": "^1.0.10",
     "spritesmith": "^0.18.0"
   },
   "devDependencies": {
