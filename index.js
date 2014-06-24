@@ -13,8 +13,7 @@ var createCSSPropertiesFor = function(coords) {
 
 var normalizeRest = function(rest) {
   rest = rest.replace(/(\s+|\n|\r)/, '');
-  rest = rest ? ' ' + rest : rest;
-  return rest;
+  return rest ? ' ' + rest : rest;
 };
 
 var normalizeDelimiter = function(delimiter) {
